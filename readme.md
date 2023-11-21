@@ -1,12 +1,10 @@
 ## The Snake Game
 
-The classic snake game I created using:  
-- vanilla JavaScript (Object Oriented Programming)  
-- Canvas API  
-- CSS3 (+BEM)  
-- HTML5  
+The classic snake game I created using:
+- vanilla JavaScript
+- Canvas API
+- CSS modules
 
-All graphics were created for this project by Rafał Zajączkowski.
+All graphics for this project were created by Rafał Zajączkowski.
 
-You can play the game [here](http://sandramichalska.pl/snake/)
-
+You can play the game [here](https://sandra-michalska.github.io/snake/)
