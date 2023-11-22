@@ -102,5 +102,3 @@ export function Renderer() {
         drawImg(imgData[powerupData.type], powerupData.x, powerupData.y, SQUARE_SIZE, SQUARE_SIZE);
     }
 }
-
-// const renderer = new Renderer(canvas); // TODO

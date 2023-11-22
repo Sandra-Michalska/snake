@@ -1,21 +1,16 @@
 import { SETTINGS } from './consts/settings.js';
 import { GameLogic } from './gameLogic.js';
 
-export let gameLogic = null; // TODO
+export function init() {
+	// window.canvas = document.querySelector('#canvas'); // TODO
+	document.querySelector('#sn-settings__start-btn').addEventListener('click', function() {
+		const settings = prepareSettings();
+		toggleSections();
 
-export function init() {	
-	window.onload = function() {	
-		// window.canvas = document.querySelector('#canvas'); // TODO
-
-		document.querySelector('#sn-settings__start-btn').addEventListener('click', function() {
-			const settings = prepareSettings();
-			toggleSections();
-
-			gameLogic = new GameLogic();
-			gameLogic.setSettings(settings);
-			gameLogic.startGame();
-		});
-	}
+		const gameLogic = new GameLogic();
+		gameLogic.setSettings(settings);
+		gameLogic.startGame();
+	});
 };
 
 function prepareSettings() {

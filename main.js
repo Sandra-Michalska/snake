@@ -65,5 +65,5 @@ document.querySelector('#app').innerHTML = `
     </div>
   </div>
 `
-// window.canvas = document.querySelector('#canvas'); // TODO
+
 init()

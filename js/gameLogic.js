@@ -2,8 +2,6 @@ import { Snake } from './snake.js';
 import { Renderer } from './renderer.js';
 import { BOARD_SQUARES_NUMBER } from './consts/consts.js'
 
-// const renderer = new Renderer(); // TODO
-
 export function GameLogic() {
     const LOOP_EVERY_N_MS = 1000;
     let score = 0;
@@ -20,11 +18,11 @@ export function GameLogic() {
     let powerupTimeout;
     let powerupTimeoutSet = false;
 
-    const snake = new Snake();
     let gameSettings = null;
     const that = this;
 
-    const renderer = new Renderer(); // TODO
+    const snake = new Snake();
+    const renderer = new Renderer();
 
     this.setSettings = function(settings) {
         gameSettings = settings;
@@ -298,5 +296,3 @@ export function GameLogic() {
         that.startGame();
     }
 }
-
-// const gameLogic = new GameLogic(); // TODO
