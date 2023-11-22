@@ -68,10 +68,10 @@ export function Renderer() {
     }
 
     this.drawObstacles = function(obstaclePositions, snake) {
-        let obstacleImg = "obstacle";
+        let obstacleImg = 'obstacle';
 
         if(snake.canGoThroughWalls) {
-            obstacleImg = "obstacleTransparent";
+            obstacleImg = 'obstacleTransparent';
         }
 
         obstaclePositions.forEach(function(obstacle) {

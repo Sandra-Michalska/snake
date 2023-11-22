@@ -257,7 +257,7 @@ export function GameLogic() {
             return a - b;
         });
 
-        document.querySelector('#game__score-list').innerHTML = "";
+        document.querySelector('#game__score-list').innerHTML = '';
 
         for(let i = 0; i < 5; i++) {
             if(bestScores[i]) {	

@@ -32,6 +32,6 @@ function prepareSettings() {
 }
 
 function toggleSections() {
-	document.querySelector('#game-wrapper').style.display = "block"; // TODO
-	document.querySelector('#settings-wrapper').style.display = "none";
+	document.querySelector('#game-wrapper').style.display = 'block'; // TODO
+	document.querySelector('#settings-wrapper').style.display = 'none';
 }
