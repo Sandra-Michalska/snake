@@ -1,7 +1,12 @@
 import { SETTINGS } from './consts/settings.js';
 import { GameLogic } from './gameLogic.js';
+import { Renderer } from './renderer.js';
+
+export let renderer = null;
 
 export function init() {
+	renderer = new Renderer();
+	
 	document.querySelector('#settings__start-btn').addEventListener('click', function() {
 		const settings = prepareSettings();
 		toggleSections();

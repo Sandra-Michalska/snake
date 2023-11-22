@@ -1,5 +1,5 @@
 import { Snake } from './snake.js';
-import { Renderer } from './renderer.js';
+import { renderer } from './start.js';
 import { BOARD_SQUARES_NUMBER } from './consts/consts.js'
 
 export function GameLogic() {
@@ -22,7 +22,6 @@ export function GameLogic() {
     const that = this;
 
     const snake = new Snake();
-    const renderer = new Renderer();
 
     this.setSettings = function(settings) {
         gameSettings = settings;
