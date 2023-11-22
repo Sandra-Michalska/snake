@@ -79,7 +79,7 @@ export function GameLogic() {
     function increaseScore(pointsNumber) {
         score += pointsNumber;
     
-        document.querySelector('#sn-game__score').innerHTML = score;
+        document.querySelector('#game__score').innerHTML = score;
     }
 
     // apple
@@ -247,7 +247,7 @@ export function GameLogic() {
 
         snake.resetVales();
         
-        document.querySelector('#sn-game__score').innerHTML = 0;
+        document.querySelector('#game__score').innerHTML = 0;
     }
 
     function addScoreToBestScores(score) {
@@ -257,13 +257,13 @@ export function GameLogic() {
             return a - b;
         });
 
-        document.querySelector('#sn-game__score-list').innerHTML = "";
+        document.querySelector('#game__score-list').innerHTML = "";
 
         for(let i = 0; i < 5; i++) {
             if(bestScores[i]) {	
                 const li = document.createElement('li');
                 li.appendChild(document.createTextNode(bestScores[i]));
-                document.querySelector('#sn-game__score-list').appendChild(li).classList.add('sn-game__score-list-item');
+                document.querySelector('#game__score-list').appendChild(li).classList.add('game__score-list-item');
             }
         }
     }

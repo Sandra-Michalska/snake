@@ -3,7 +3,7 @@ import { GameLogic } from './gameLogic.js';
 
 export function init() {
 	// window.canvas = document.querySelector('#canvas'); // TODO
-	document.querySelector('#sn-settings__start-btn').addEventListener('click', function() {
+	document.querySelector('#settings__start-btn').addEventListener('click', function() {
 		const settings = prepareSettings();
 		toggleSections();
 
@@ -32,6 +32,6 @@ function prepareSettings() {
 }
 
 function toggleSections() {
-	document.querySelector('#sn-game-wrap').style.display = "block"; // TODO
-	document.querySelector('#sn-settings-wrap').style.display = "none";
+	document.querySelector('#game-wrapper').style.display = "block"; // TODO
+	document.querySelector('#settings-wrapper').style.display = "none";
 }

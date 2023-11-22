@@ -6,7 +6,7 @@ body {
     color: #fff;
 }
 
-.sn-wrap {
+.wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,20 +17,19 @@ body {
     background-size: cover;
 }
 
-.sn-heading {
+.heading {
     margin: 0 0 1em;
     font-size: 3em;
 }
 
-/* settings */
-.sn-settings {
+.settings {
     padding: 3em 3em 2.6em;
     background: rgba(235, 170, 27, 0.9);
     border: 2px solid #615959;
     box-shadow: 0px 0px 3px #5c5241;
 }
 
-.sn-settings__title {
+.settings__title {
     padding: 0.1em 0.3em;
     font-size: 1.8em; 
     font-weight: 700;
@@ -41,17 +40,17 @@ body {
     box-shadow: 0px 0px 6px #5c5241;
 }
 
-.sn-settings__option {
+.settings__option {
     margin-bottom: 1.5em;
 }
 
-.sn-settings__option-label {
+.settings__option-label {
     padding: 0 0.8em 0 0;
     font-weight: 700;
     font-size: 1.5em;
 }
 
-.sn-settings__select {
+.settings__select {
     height: 32px;
     padding: 0 3px;
     background: #fff;
@@ -60,13 +59,13 @@ body {
     border-radius: 4px;
 }
 
-.sn-settings__start-btn-wrap {
+.settings__start-btn-wrapper {
     display: flex;
     justify-content: center;
     margin-top: 2.2em;
 }
 
-.sn-settings__start-btn {
+.settings__start-btn {
     padding: 0.2em 0.7em;
     font-family: 'Caveat Brush', cursive;
     letter-spacing: 2px;
@@ -80,46 +79,45 @@ body {
     cursor: pointer;
 }
 
-.sn-settings__start-btn:hover {
+.settings__start-btn:hover {
     background: #e2dada;
 }
 
-/* game */
-.sn-game-wrap {
+.game-wrapper {
     display: none;
 }
 
-.sn-game {
+.game {
 	display: flex;
     justify-content: center;
     flex-wrap: wrap;
     font-size: 1.6em;
 }
 
-.sn-game__canvas {
+.game__canvas {
     margin-bottom: 2em;
     border: 1px solid #7f6b6b;
     border-radius: 4px;
     box-shadow: 0px 0px 3px #5c5241;
 }
 
-.sn-game__score-list {
+.game__score-list {
     font-size: 0.9em;
     line-height: 1.5em;
 }
 
-.sn-game__score-list-item {
+.game__score-list-item {
     font-weight: 700;
 }
 
-.sn-game__score-txt {
+.game__score-txt {
     margin: 0 0 1em;
 }
 
-.sn-game__best-scores {
+.game__best-scores {
     margin: 0 0 0 50px;
 }
 
-.sn-game__best-score-txt {
+.game__best-score-txt {
     margin: 0 0 1em;
 }
