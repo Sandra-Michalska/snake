@@ -54,7 +54,7 @@ export function Renderer() {
 
     this.drawBackground = function() {
         ctx.fillStyle = '#fff';
-        ctx.strokeStyle = '#f2ecd7';
+        ctx.strokeStyle = '#e1dfdc';
         
         ctx.fillRect(0, 0, canvas.height, canvas.width);
 
