@@ -2,7 +2,10 @@ export function Renderer() {
     const SQUARE_SIZE = 29;
     const LINE_WIDTH = 1;
     const LINE_EVERY_N_PX = 30;
+    
     const imgData = {};
+
+    const canvas = document.querySelector('#canvas');
     const ctx = canvas.getContext('2d');
 
     // prepare images
