@@ -8,32 +8,32 @@ function Renderer(canvas) {
 
     // prepare images
     imgData.apple = new Image();
-    imgData.apple.src = 'img/apple.png';
+    imgData.apple.src = '/images/apple.png';
 
     imgData.obstacle = new Image();
-    imgData.obstacle.src = 'img/obstacle.png';
+    imgData.obstacle.src = '/images/obstacle.png';
 
     imgData.obstacleTransparent = new Image();
-    imgData.obstacleTransparent.src = 'img/obstacle-transparent.png';
+    imgData.obstacleTransparent.src = '/images/obstacle-transparent.png';
 
     // prepare images - powerups
     imgData.lengthen = new Image();
-    imgData.lengthen.src = 'img/powerups/lengthen.png';
+    imgData.lengthen.src = '/images/powerups/lengthen.png';
 
     imgData.shorten = new Image();
-    imgData.shorten.src = 'img/powerups/shorten.png';
+    imgData.shorten.src = '/images/powerups/shorten.png';
 
     imgData.speedUp = new Image();
-    imgData.speedUp.src = 'img/powerups/speed-up.png';
+    imgData.speedUp.src = '/images/powerups/speed-up.png';
 
     imgData.speedDown = new Image();
-    imgData.speedDown.src = 'img/powerups/speed-down.png';
+    imgData.speedDown.src = '/images/powerups/speed-down.png';
 
     imgData.points = new Image();
-    imgData.points.src = 'img/powerups/points.png';
+    imgData.points.src = '/images/powerups/points.png';
 
     imgData.goThroughWalls = new Image();
-    imgData.goThroughWalls.src = 'img/powerups/go-through-walls.png';
+    imgData.goThroughWalls.src = '/images/powerups/go-through-walls.png';
 
     function drawImg(imgToDisplay, x, y, width, height) {
         var imgXPosition = x * (LINE_WIDTH + SQUARE_SIZE) + LINE_WIDTH;
