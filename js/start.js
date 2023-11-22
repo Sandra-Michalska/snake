@@ -1,14 +1,32 @@
-var canvas = document.querySelector('#canvas');
+import { LEVELS_CONFIG } from './levelsConfig';
+import { GameLogic } from './gameLogic.js';
+
+export let gameLogic = null; // TODO
+
+export function init() {	
+	window.onload = function() {	
+		// window.canvas = document.querySelector('#canvas'); // TODO
+
+		document.querySelector('#sn-settings__start-btn').addEventListener('click', function() {
+			const gameSettings = getGameSettings();
+			toggleSections();
+
+			gameLogic = new GameLogic();
+			gameLogic.setGameSettings(gameSettings);
+			gameLogic.startNewGame();
+		});
+	}
+};
 
 function getGameSettings() {
-	var userSettings = {
+	const userSettings = {
 		level: document.querySelector('#level').value,
 		speed: document.querySelector('#speed').value,
 		powerupSpeedChangeTime: document.querySelector('#speed-change-time').value,
 		lengthChange: document.querySelector('#length-change').value
 	};
 
-	var chosenLevel = window.levelsConfig['level' + userSettings.level];
+	const chosenLevel = LEVELS_CONFIG['level' + userSettings.level];
 
 	return {
 		chosenLevel: chosenLevel,
@@ -19,15 +37,6 @@ function getGameSettings() {
 }
 
 function toggleSections() {
-	document.querySelector('#sn-game-wrap').style.display = "block";
+	document.querySelector('#sn-game-wrap').style.display = "block"; // TODO
 	document.querySelector('#sn-settings-wrap').style.display = "none";
 }
-
-window.onload = function() {
-	document.querySelector('#sn-settings__start-btn').addEventListener('click', function() {
-		var gameSettings = getGameSettings();
-		toggleSections();
-		gameLogic.setGameSettings(gameSettings);
-		gameLogic.startNewGame();
-	});
-};

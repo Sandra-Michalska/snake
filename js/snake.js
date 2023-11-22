@@ -1,13 +1,15 @@
-function Snake() {
-    var squaresPositions = [];
-    var currentDirection = 'right';
+import { gameLogic } from './start.js'
+
+export function Snake() {
+    let squaresPositions = [];
+    let currentDirection = 'right';
     this.canChangeDirection = true;
     this.canGoThroughWalls = false;
 
     this.speed = 0;
     this.powerupSpeedChangeTime = 0;
 
-    var that = this;
+    const that = this;
 
     this.setPosition = function() {
         squaresPositions.push({x: 2, y: 0}, {x: 1, y: 0}, {x: 0, y: 0});
@@ -26,7 +28,7 @@ function Snake() {
     }
 
     this.move = function() {
-        for(var i = squaresPositions.length - 1; i > 0; i--) {
+        for(let i = squaresPositions.length - 1; i > 0; i--) {
             squaresPositions[i].x = squaresPositions[i-1].x;
             squaresPositions[i].y = squaresPositions[i-1].y;
         }
@@ -83,15 +85,15 @@ function Snake() {
     };
 
     this.lengthen = function(squaresNumber) {
-        var lastSquare = squaresPositions[squaresPositions.length - 1];
+        const lastSquare = squaresPositions[squaresPositions.length - 1];
     
-        for(var i = 0; i < squaresNumber; i++) {
+        for(let i = 0; i < squaresNumber; i++) {
             squaresPositions.push({x: lastSquare.x, y: lastSquare.y});
         }
     }
 
     this.shorten = function(squaresNumber) {
-        for(var i = 0; i < squaresNumber; i++) {
+        for(let i = 0; i < squaresNumber; i++) {
             squaresPositions.pop();
         }
     }

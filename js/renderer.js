@@ -1,10 +1,9 @@
-function Renderer(canvas) {
-    var SQUARE_SIZE = 29;
-    var LINE_WIDTH = 1;
-    var LINE_EVERY_N_PX = 30;
-    var imgData = {};
-    var canvas = canvas;
-    var ctx = canvas.getContext('2d');
+export function Renderer() {
+    const SQUARE_SIZE = 29;
+    const LINE_WIDTH = 1;
+    const LINE_EVERY_N_PX = 30;
+    const imgData = {};
+    const ctx = canvas.getContext('2d');
 
     // prepare images
     imgData.apple = new Image();
@@ -36,15 +35,15 @@ function Renderer(canvas) {
     imgData.goThroughWalls.src = '/images/powerups/go-through-walls.png';
 
     function drawImg(imgToDisplay, x, y, width, height) {
-        var imgXPosition = x * (LINE_WIDTH + SQUARE_SIZE) + LINE_WIDTH;
-        var imgYPosition = y * (LINE_WIDTH + SQUARE_SIZE) + LINE_WIDTH;
+        const imgXPosition = x * (LINE_WIDTH + SQUARE_SIZE) + LINE_WIDTH;
+        const imgYPosition = y * (LINE_WIDTH + SQUARE_SIZE) + LINE_WIDTH;
     
         ctx.drawImage(imgToDisplay, imgXPosition, imgYPosition, width, height);
     }
 
     function drawSnakeSquare(x, y, color) {
-        var addXOffset = LINE_WIDTH * x + LINE_WIDTH;
-        var addYOffset = LINE_WIDTH * y + LINE_WIDTH;
+        const addXOffset = LINE_WIDTH * x + LINE_WIDTH;
+        const addYOffset = LINE_WIDTH * y + LINE_WIDTH;
 
         ctx.fillStyle = color;
         ctx.fillRect(x * SQUARE_SIZE + addXOffset, y * SQUARE_SIZE + addYOffset, SQUARE_SIZE, SQUARE_SIZE);
@@ -56,11 +55,11 @@ function Renderer(canvas) {
         
         ctx.fillRect(0, 0, canvas.height, canvas.width);
 
-        for(var x = 0.5; x < canvas.width; x += LINE_EVERY_N_PX) {
+        for(let x = 0.5; x < canvas.width; x += LINE_EVERY_N_PX) {
             ctx.moveTo(x, 0);
             ctx.lineTo(x, canvas.height);
         }
-        for(var y = 0.5; y < canvas.height; y += LINE_EVERY_N_PX) {
+        for(let y = 0.5; y < canvas.height; y += LINE_EVERY_N_PX) {
             ctx.moveTo(0, y);
             ctx.lineTo(canvas.width, y);
         }
@@ -69,7 +68,7 @@ function Renderer(canvas) {
     }
 
     this.drawObstacles = function(obstaclesPositions, snake) {
-        var obstacleImg = "obstacle";
+        let obstacleImg = "obstacle";
 
         if(snake.canGoThroughWalls) {
             obstacleImg = "obstacleTransparent";
@@ -81,7 +80,7 @@ function Renderer(canvas) {
     }
 
     this.drawSnake = function(snake) {
-        for(var i = 0; i < snake.getLength(); i++) {
+        for(let i = 0; i < snake.getLength(); i++) {
             if(i === 0) {
                 drawSnakeSquare(snake.getSquarePosition(i).x, snake.getSquarePosition(i).y, '#e67312');
                 continue;
@@ -104,4 +103,4 @@ function Renderer(canvas) {
     }
 }
 
-var renderer = new Renderer(canvas);
+// const renderer = new Renderer(canvas); // TODO

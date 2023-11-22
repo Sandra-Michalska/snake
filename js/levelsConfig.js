@@ -1,4 +1,4 @@
-var levelsConfig = {
+export const LEVELS_CONFIG = {
     level1: {
         level: 1,
         speed: 0.7,

@@ -1,23 +1,30 @@
-function GameLogic() {
+import { Snake } from './snake.js';
+import { Renderer } from './renderer.js';
+
+// const renderer = new Renderer(); // TODO
+
+export function GameLogic() {
     this.BOARD_SQUARES_NUMBER = 20;
-    var LOOP_EVERY_N_MS = 1000;
-    var score = 0;
-    var applesEaten = 0;
-    var applePosition = null;
-    var powerupData = {};
-    var powerupsNumber = 6;
-    var	activatePowerup = null;
-    var snakeLengthChange = 1;
-    var bestScores = [];
+    const LOOP_EVERY_N_MS = 1000;
+    let score = 0;
+    let applesEaten = 0;
+    let applePosition = null;
+    let powerupData = {};
+    let powerupsNumber = 6;
+    let	activatePowerup = null;
+    let snakeLengthChange = 1;
+    let bestScores = [];
 
-    var startNewGameTimeout;
-    var loopGameTimeout;
-    var powerupTimeout;
-    var powerupTimeoutSet = false;
+    let startNewGameTimeout;
+    let loopGameTimeout;
+    let powerupTimeout;
+    let powerupTimeoutSet = false;
 
-    var snake = new Snake();
-    var gameSettings = null;
-    var that = this;
+    const snake = new Snake();
+    let gameSettings = null;
+    const that = this;
+
+    const renderer = new Renderer(); // TODO
 
     this.setGameSettings = function(settings) {
         gameSettings = settings;
@@ -36,15 +43,15 @@ function GameLogic() {
         renderer.drawApple(applePosition);
     
         document.addEventListener('keydown', function(e) {
-            var keysToDirections = {
+            const keysToDirections = {
                 37: 'left',
                 38: 'up',
                 39: 'right',
                 40: 'down'
             };
 
-            var keyPressed = e.which;
-            var direction = keysToDirections[keyPressed];
+            const keyPressed = e.which; // TODO
+            const direction = keysToDirections[keyPressed];
             snake.changeDirection(e, direction);
         });
 
@@ -81,7 +88,7 @@ function GameLogic() {
     function generateApplePosition() {
         if(applePosition) return;
     
-        var isPositionAllowed = false;
+        let isPositionAllowed = false;
     
         while(!isPositionAllowed) {
             applePosition = {
@@ -91,13 +98,13 @@ function GameLogic() {
     
             isPositionAllowed = true;
             
-            for (var i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
+            for (let i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
                 if(applePosition.x === gameSettings.chosenLevel.obstaclesPositions[i].x && applePosition.y === gameSettings.chosenLevel.obstaclesPositions[i].y) {
                     isPositionAllowed = false;
                 }
             }
     
-            for (var i = 0; i < snake.getLength(); ++i) {
+            for (let i = 0; i < snake.getLength(); ++i) {
                 if(applePosition.x === snake.getSquarePosition(i).x && applePosition.y === snake.getSquarePosition(i).y) {
                     isPositionAllowed = false;
                 }
@@ -106,7 +113,7 @@ function GameLogic() {
     }
 
     function eatApple() {
-        var snakeHead = snake.getHead();
+        const snakeHead = snake.getHead();
     
         if(snakeHead.x === applePosition.x && snakeHead.y === applePosition.y) {
             applePosition = null;
@@ -151,7 +158,7 @@ function GameLogic() {
     }
 
     function generatePowerupPosition() {
-        var isPositionAllowed = false;
+        let isPositionAllowed = false;
     
         while(!isPositionAllowed) {
             powerupData = {
@@ -161,13 +168,13 @@ function GameLogic() {
 
             isPositionAllowed = true;
             
-            for (var i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
+            for (let i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
                 if(powerupData.x === gameSettings.chosenLevel.obstaclesPositions[i].x && powerupData.y === gameSettings.chosenLevel.obstaclesPositions[i].y) {
                     isPositionAllowed = false;
                 }
             }
     
-            for (var i = 0; i < snake.getLength(); ++i) {
+            for (let i = 0; i < snake.getLength(); ++i) {
                 if(powerupData.x === snake.getSquarePosition(i).x && powerupData.y === snake.getSquarePosition(i).y) {
                     isPositionAllowed = false;
                 }
@@ -186,7 +193,7 @@ function GameLogic() {
     }
 
     function generatePowerupType() {
-        var number = Math.floor(Math.random() * powerupsNumber) + 1;
+        const number = Math.floor(Math.random() * powerupsNumber) + 1;
        
         switch(number) {
             case 1:
@@ -254,9 +261,9 @@ function GameLogic() {
 
         document.querySelector('#sn-game__score-list').innerHTML = "";
 
-        for(var i = 0; i < 5; i++) {
+        for(let i = 0; i < 5; i++) {
             if(bestScores[i]) {	
-                var li = document.createElement('li');
+                const li = document.createElement('li');
                 li.appendChild(document.createTextNode(bestScores[i]));
                 document.querySelector('#sn-game__score-list').appendChild(li).classList.add('sn-game__score-list-item');
             }
@@ -264,9 +271,9 @@ function GameLogic() {
     }
 
     function loseWhenGoingThroughSnake() {
-        var snakeHead = snake.getHead();
+        const snakeHead = snake.getHead();
     
-        for (var i = 1; i < snake.getLength(); ++i) {
+        for (let i = 1; i < snake.getLength(); ++i) {
             if(snakeHead.x === snake.getSquarePosition(i).x && snakeHead.y === snake.getSquarePosition(i).y) {
                 finishGame();
             }
@@ -276,9 +283,9 @@ function GameLogic() {
     function loseWhenGoingThroughObstacles() {
         if(snake.canGoThroughWalls) return;
         
-        var snakeHead = snake.getHead();
+        const snakeHead = snake.getHead();
 
-        for (var i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
+        for (let i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
             if(snakeHead.x === gameSettings.chosenLevel.obstaclesPositions[i].x && snakeHead.y === gameSettings.chosenLevel.obstaclesPositions[i].y) {
                 finishGame();
             }
@@ -292,4 +299,4 @@ function GameLogic() {
     }
 }
 
-var gameLogic = new GameLogic();
+// const gameLogic = new GameLogic(); // TODO
