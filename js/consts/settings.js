@@ -1,8 +1,8 @@
-export const LEVELS_CONFIG = {
+export const SETTINGS = {
     level1: {
         level: 1,
         speed: 0.7,
-        obstaclesPositions: [
+        obstaclePositions: [
             {x: 3, y: 2},
             {x: 3, y: 3},
             {x: 17, y: 2},
@@ -28,7 +28,7 @@ export const LEVELS_CONFIG = {
     level2: {
         level: 2,
         speed: 0.55,
-        obstaclesPositions: [
+        obstaclePositions: [
             {x: 1, y: 7},
             {x: 3, y: 2},
             {x: 3, y: 3},
@@ -59,7 +59,7 @@ export const LEVELS_CONFIG = {
     level3: {
         level: 3,
         speed: 0.45,
-        obstaclesPositions: [
+        obstaclePositions: [
             {x: 1, y: 7},
             {x: 3, y: 1},
             {x: 3, y: 2},
@@ -96,7 +96,7 @@ export const LEVELS_CONFIG = {
     level4: {
         level: 4,
         speed: 0.38,
-        obstaclesPositions: [
+        obstaclePositions: [
             {x: 0, y: 1},
             {x: 0, y: 4},
             {x: 0, y: 19},
@@ -154,7 +154,7 @@ export const LEVELS_CONFIG = {
     level5: {
         level: 5,
         speed: 0.3,
-        obstaclesPositions: [
+        obstaclePositions: [
             {x: 0, y: 4},
             {x: 0, y: 1},
             {x: 0, y: 10},

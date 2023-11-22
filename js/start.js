@@ -1,4 +1,4 @@
-import { LEVELS_CONFIG } from './levelsConfig';
+import { SETTINGS } from './consts/settings.js';
 import { GameLogic } from './gameLogic.js';
 
 export let gameLogic = null; // TODO
@@ -26,7 +26,7 @@ function getGameSettings() {
 		lengthChange: document.querySelector('#length-change').value
 	};
 
-	const chosenLevel = LEVELS_CONFIG['level' + userSettings.level];
+	const chosenLevel = SETTINGS['level' + userSettings.level];
 
 	return {
 		chosenLevel: chosenLevel,

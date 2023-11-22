@@ -36,7 +36,7 @@ export function GameLogic() {
     this.startNewGame = function() {        
         resetGameValues();
         renderer.drawBackground();
-        renderer.drawObstacles(gameSettings.chosenLevel.obstaclesPositions, snake);
+        renderer.drawObstacles(gameSettings.chosenLevel.obstaclePositions, snake);
         snake.setPosition();
         renderer.drawSnake(snake);
         generateApplePosition();
@@ -63,7 +63,7 @@ export function GameLogic() {
         clearTimeout(loopGameTimeout);
         snake.canChangeDirection = true;
         renderer.drawBackground(); // to clean previous snake state
-        renderer.drawObstacles(gameSettings.chosenLevel.obstaclesPositions, snake);
+        renderer.drawObstacles(gameSettings.chosenLevel.obstaclePositions, snake);
         checkIfDrawPowerup();
         renderer.drawPowerup(powerupData);
         renderer.drawApple(applePosition);
@@ -98,8 +98,8 @@ export function GameLogic() {
     
             isPositionAllowed = true;
             
-            for (let i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
-                if(applePosition.x === gameSettings.chosenLevel.obstaclesPositions[i].x && applePosition.y === gameSettings.chosenLevel.obstaclesPositions[i].y) {
+            for (let i = 0; i < gameSettings.chosenLevel.obstaclePositions.length; ++i) {
+                if(applePosition.x === gameSettings.chosenLevel.obstaclePositions[i].x && applePosition.y === gameSettings.chosenLevel.obstaclePositions[i].y) {
                     isPositionAllowed = false;
                 }
             }
@@ -168,8 +168,8 @@ export function GameLogic() {
 
             isPositionAllowed = true;
             
-            for (let i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
-                if(powerupData.x === gameSettings.chosenLevel.obstaclesPositions[i].x && powerupData.y === gameSettings.chosenLevel.obstaclesPositions[i].y) {
+            for (let i = 0; i < gameSettings.chosenLevel.obstaclePositions.length; ++i) {
+                if(powerupData.x === gameSettings.chosenLevel.obstaclePositions[i].x && powerupData.y === gameSettings.chosenLevel.obstaclePositions[i].y) {
                     isPositionAllowed = false;
                 }
             }
@@ -285,8 +285,8 @@ export function GameLogic() {
         
         const snakeHead = snake.getHead();
 
-        for (let i = 0; i < gameSettings.chosenLevel.obstaclesPositions.length; ++i) {
-            if(snakeHead.x === gameSettings.chosenLevel.obstaclesPositions[i].x && snakeHead.y === gameSettings.chosenLevel.obstaclesPositions[i].y) {
+        for (let i = 0; i < gameSettings.chosenLevel.obstaclePositions.length; ++i) {
+            if(snakeHead.x === gameSettings.chosenLevel.obstaclePositions[i].x && snakeHead.y === gameSettings.chosenLevel.obstaclePositions[i].y) {
                 finishGame();
             }
         }

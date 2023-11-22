@@ -67,14 +67,14 @@ export function Renderer() {
         ctx.stroke();
     }
 
-    this.drawObstacles = function(obstaclesPositions, snake) {
+    this.drawObstacles = function(obstaclePositions, snake) {
         let obstacleImg = "obstacle";
 
         if(snake.canGoThroughWalls) {
             obstacleImg = "obstacleTransparent";
         }
 
-        obstaclesPositions.forEach(function(obstacle) {
+        obstaclePositions.forEach(function(obstacle) {
             drawImg(imgData[obstacleImg], obstacle.x, obstacle.y, SQUARE_SIZE, SQUARE_SIZE);
         })
     }
