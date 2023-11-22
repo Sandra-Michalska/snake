@@ -1,10 +1,10 @@
 import { Snake } from './snake.js';
 import { Renderer } from './renderer.js';
+import { BOARD_SQUARES_NUMBER } from './consts/consts.js'
 
 // const renderer = new Renderer(); // TODO
 
 export function GameLogic() {
-    this.BOARD_SQUARES_NUMBER = 20;
     const LOOP_EVERY_N_MS = 1000;
     let score = 0;
     let applesEaten = 0;
@@ -15,7 +15,7 @@ export function GameLogic() {
     let snakeLengthChange = 1;
     let bestScores = [];
 
-    let startNewGameTimeout;
+    let startGameTimeout;
     let loopGameTimeout;
     let powerupTimeout;
     let powerupTimeoutSet = false;
@@ -26,17 +26,17 @@ export function GameLogic() {
 
     const renderer = new Renderer(); // TODO
 
-    this.setGameSettings = function(settings) {
+    this.setSettings = function(settings) {
         gameSettings = settings;
         snake.speed = gameSettings.snakeSpeed;
         snake.powerupSpeedChangeTime = gameSettings.snakepowerupSpeedChangeTime;
         snakeLengthChange = gameSettings.snakeLengthChange;
     }
     
-    this.startNewGame = function() {        
+    this.startGame = function() {        
         resetGameValues();
         renderer.drawBackground();
-        renderer.drawObstacles(gameSettings.chosenLevel.obstaclePositions, snake);
+        renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions, snake);
         snake.setPosition();
         renderer.drawSnake(snake);
         generateApplePosition();
@@ -55,15 +55,15 @@ export function GameLogic() {
             snake.changeDirection(e, direction);
         });
 
-        startNewGameTimeout = setTimeout(function() { loopGame() }, LOOP_EVERY_N_MS);  
+        startGameTimeout = setTimeout(function() { loopGame() }, LOOP_EVERY_N_MS);  
     }
 
     function loopGame() {
-        clearTimeout(startNewGameTimeout);
+        clearTimeout(startGameTimeout);
         clearTimeout(loopGameTimeout);
         snake.canChangeDirection = true;
         renderer.drawBackground(); // to clean previous snake state
-        renderer.drawObstacles(gameSettings.chosenLevel.obstaclePositions, snake);
+        renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions, snake);
         checkIfDrawPowerup();
         renderer.drawPowerup(powerupData);
         renderer.drawApple(applePosition);
@@ -92,14 +92,14 @@ export function GameLogic() {
     
         while(!isPositionAllowed) {
             applePosition = {
-                x: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER),
-                y: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER)
+                x: Math.floor(Math.random() * BOARD_SQUARES_NUMBER),
+                y: Math.floor(Math.random() * BOARD_SQUARES_NUMBER)
             };
     
             isPositionAllowed = true;
             
-            for (let i = 0; i < gameSettings.chosenLevel.obstaclePositions.length; ++i) {
-                if(applePosition.x === gameSettings.chosenLevel.obstaclePositions[i].x && applePosition.y === gameSettings.chosenLevel.obstaclePositions[i].y) {
+            for (let i = 0; i < gameSettings.levelSettings.obstaclePositions.length; ++i) {
+                if(applePosition.x === gameSettings.levelSettings.obstaclePositions[i].x && applePosition.y === gameSettings.levelSettings.obstaclePositions[i].y) {
                     isPositionAllowed = false;
                 }
             }
@@ -120,10 +120,10 @@ export function GameLogic() {
             generateApplePosition();
             renderer.drawApple(applePosition);
             snake.lengthen(1);
-            increaseScore(gameSettings.chosenLevel.level);
+            increaseScore(gameSettings.levelSettings.level);
             applesEaten += 1;
     
-            if((applesEaten + gameSettings.chosenLevel.level) % 3 === 0) {
+            if((applesEaten + gameSettings.levelSettings.level) % 3 === 0) {
                 preparePowerupData();
             }
         }
@@ -162,14 +162,14 @@ export function GameLogic() {
     
         while(!isPositionAllowed) {
             powerupData = {
-                x: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER),
-                y: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER)
+                x: Math.floor(Math.random() * BOARD_SQUARES_NUMBER),
+                y: Math.floor(Math.random() * BOARD_SQUARES_NUMBER)
             };
 
             isPositionAllowed = true;
             
-            for (let i = 0; i < gameSettings.chosenLevel.obstaclePositions.length; ++i) {
-                if(powerupData.x === gameSettings.chosenLevel.obstaclePositions[i].x && powerupData.y === gameSettings.chosenLevel.obstaclePositions[i].y) {
+            for (let i = 0; i < gameSettings.levelSettings.obstaclePositions.length; ++i) {
+                if(powerupData.x === gameSettings.levelSettings.obstaclePositions[i].x && powerupData.y === gameSettings.levelSettings.obstaclePositions[i].y) {
                     isPositionAllowed = false;
                 }
             }
@@ -285,8 +285,8 @@ export function GameLogic() {
         
         const snakeHead = snake.getHead();
 
-        for (let i = 0; i < gameSettings.chosenLevel.obstaclePositions.length; ++i) {
-            if(snakeHead.x === gameSettings.chosenLevel.obstaclePositions[i].x && snakeHead.y === gameSettings.chosenLevel.obstaclePositions[i].y) {
+        for (let i = 0; i < gameSettings.levelSettings.obstaclePositions.length; ++i) {
+            if(snakeHead.x === gameSettings.levelSettings.obstaclePositions[i].x && snakeHead.y === gameSettings.levelSettings.obstaclePositions[i].y) {
                 finishGame();
             }
         }
@@ -295,7 +295,7 @@ export function GameLogic() {
     function finishGame() {
         addScoreToBestScores(score);
         clearPowerupTimeout();
-        that.startNewGame();
+        that.startGame();
     }
 }
 

@@ -1,0 +1,1 @@
+export const BOARD_SQUARES_NUMBER = 20;
