@@ -11,17 +11,18 @@ export function GameLogic() {
     let powerupsNumber = 6;
     let	activatePowerup = null;
     let snakeLengthChange = 1;
-    let bestScores = [];
+    this.bestScores = [];
 
     let startGameTimeout;
-    let loopGameTimeout;
+    this.loopGameTimeout;
     let powerupTimeout;
     let powerupTimeoutSet = false;
 
     let gameSettings = null;
-    const that = this;
 
     const snake = new Snake();
+
+    const that = this;
 
     this.setSettings = function(settings) {
         gameSettings = settings;
@@ -31,7 +32,7 @@ export function GameLogic() {
     }
     
     this.startGame = function() {        
-        resetGameValues();
+        this.resetGameValues();
         renderer.drawBackground();
         renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions, snake);
         snake.setPosition();
@@ -47,17 +48,17 @@ export function GameLogic() {
                 40: 'down'
             };
 
-            const keyPressed = e.which; // TODO
+            const keyPressed = e.which;
             const direction = keysToDirections[keyPressed];
             snake.changeDirection(e, direction);
         });
 
-        startGameTimeout = setTimeout(function() { loopGame() }, LOOP_EVERY_N_MS);  
+        startGameTimeout = setTimeout(loopGame, LOOP_EVERY_N_MS);  
     }
 
     function loopGame() {
         clearTimeout(startGameTimeout);
-        clearTimeout(loopGameTimeout);
+        clearTimeout(that.loopGameTimeout);
         snake.canChangeDirection = true;
         renderer.drawBackground(); // to clean previous snake state
         renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions, snake);
@@ -72,7 +73,7 @@ export function GameLogic() {
         loseWhenGoingThroughObstacles();
         eatApple();
 
-        loopGameTimeout = setTimeout(loopGame, snake.speed * LOOP_EVERY_N_MS);
+        that.loopGameTimeout = setTimeout(loopGame, snake.speed * LOOP_EVERY_N_MS);
     }
 
     function increaseScore(pointsNumber) {
@@ -238,8 +239,7 @@ export function GameLogic() {
         }
     }
 
-    // finish game
-    function resetGameValues() {
+    this.resetGameValues = function() {
         score = 0;
         applesEaten = 0;
         powerupTimeoutSet = false;
@@ -250,18 +250,18 @@ export function GameLogic() {
     }
 
     function addScoreToBestScores(score) {
-        bestScores.push(score);
+        that.bestScores.push(score);
 
-        bestScores = bestScores.sort(function (b, a) {
+        that.bestScores = that.bestScores.sort(function (b, a) {
             return a - b;
         });
 
         document.querySelector('#game__score-list').innerHTML = '';
 
         for(let i = 0; i < 5; i++) {
-            if(bestScores[i]) {	
+            if(that.bestScores[i]) {	
                 const li = document.createElement('li');
-                li.appendChild(document.createTextNode(bestScores[i]));
+                li.appendChild(document.createTextNode(that.bestScores[i]));
                 document.querySelector('#game__score-list').appendChild(li).classList.add('game__score-list-item');
             }
         }

@@ -3,6 +3,7 @@ import { GameLogic } from './gameLogic.js';
 import { Renderer } from './renderer.js';
 
 export let renderer = null;
+let gameLogic = null;
 
 export function init() {
 	renderer = new Renderer();
@@ -11,7 +12,7 @@ export function init() {
 		const settings = prepareSettings();
 		toggleSections();
 
-		const gameLogic = new GameLogic();
+		gameLogic = new GameLogic();
 		gameLogic.setSettings(settings);
 		gameLogic.startGame();
 	});
@@ -36,6 +37,16 @@ function prepareSettings() {
 }
 
 function toggleSections() {
-	document.querySelector('#game-wrapper').style.display = 'block'; // TODO
-	document.querySelector('#settings-wrapper').style.display = 'none';
+	document.querySelector('#game-wrapper').classList.remove("game-wrapper--hidden");
+	document.querySelector('#settings-wrapper').classList.add("settings-wrapper--hidden");
+	document.querySelector('#header__back-arrow').classList.remove("header__back-arrow--hidden");
+
+	document.querySelector('#header__back-arrow').addEventListener('click', function() {
+		clearTimeout(gameLogic.loopGameTimeout);
+		gameLogic.resetGameValues();
+		document.querySelector('#game__score-list').innerHTML = '';
+		document.querySelector('#game-wrapper').classList.add("game-wrapper--hidden");
+		document.querySelector('#settings-wrapper').classList.remove("settings-wrapper--hidden");
+		document.querySelector('#header__back-arrow').classList.add("header__back-arrow--hidden");
+	});
 }

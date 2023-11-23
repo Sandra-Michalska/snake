@@ -9,7 +9,6 @@ body {
 .wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(to bottom right, rgba(206, 187, 187, 0.3), rgba(141, 114, 114, 0.3)), url(/images/bg.png);
@@ -17,9 +16,50 @@ body {
     background-size: cover;
 }
 
-.heading {
-    margin: 0 0 1em;
+.header {
+    width: calc(100% - 135px);
+    display: flex;
+    margin: 2em 0 4em;
+}
+
+.header__back-arrow {
+    visibility: visible;
+    cursor: pointer;
+    width: 30px;
     font-size: 3em;
+    font-weight: bold;
+}
+
+.header__back-arrow--hidden {
+    visibility: hidden;
+}
+
+.header__back-arrow:hover {
+    color: #e2dada;
+}
+
+.header__heading-wrapper {
+    width: 100%;
+    min-width: 140px;
+    padding-right: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.header__heading {
+    font-size: 3em;
+    margin: 0;
+}
+
+.settings-wrapper {
+    width: calc(100% - 135px);
+    max-width: 650px;
+    min-height: 430px;
+    margin-bottom: 3em;
+}
+
+.settings-wrapper--hidden {
+    display: none;
 }
 
 .settings {
@@ -60,6 +100,7 @@ body {
     border-radius: 4px;
     color: #5d4343;
     outline: none;
+    cursor: pointer;
 }
 
 .settings__start-btn-wrapper {
@@ -87,6 +128,10 @@ body {
 }
 
 .game-wrapper {
+    width: calc(100% - 135px);
+}
+
+.game-wrapper--hidden {
     display: none;
 }
 

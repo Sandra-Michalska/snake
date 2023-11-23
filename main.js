@@ -3,9 +3,13 @@ import { init } from './js/start.js'
 
 document.querySelector('#app').innerHTML = `
   <div class="wrapper">
-    <h1 class="heading">Snake</h1>
-      
-    <section id="settings-wrapper">
+    <header class="header">
+      <span id="header__back-arrow" class="header__back-arrow header__back-arrow--hidden" title="Go back to settings"><</span>
+      <div class="header__heading-wrapper">
+        <h1 class="header__heading">Snake</h1>
+      </div>
+    </header>
+    <section id="settings-wrapper" class="settings-wrapper">
       <fieldset class="settings">
         <legend class="settings__title">Ustawienia gry</legend>
 
@@ -45,12 +49,12 @@ document.querySelector('#app').innerHTML = `
         </section>
 
         <div class="settings__start-btn-wrapper">
-          <button type="button" class="settings__start-btn" id="settings__start-btn">Start</button>
+          <button type="button" id="settings__start-btn" class="settings__start-btn">Start</button>
         </div>
       </fieldset>
     </section>
 
-    <div class="game-wrapper" id="game-wrapper">
+    <div id="game-wrapper" class="game-wrapper game-wrapper--hidden">
       <div class="game">
         <section>
           <p class="game__score-txt">Wynik: <span id="game__score">0</span></p>
@@ -59,7 +63,7 @@ document.querySelector('#app').innerHTML = `
 
         <section class="game__best-scores">
           <p class="game__best-score-txt">Najlepsze wyniki:</p>
-          <ol class="game__score-list" id="game__score-list"></ol>
+          <ol id="game__score-list" class="game__score-list"></ol>
         </section>
       </div>
     </div>
