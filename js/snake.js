@@ -65,24 +65,6 @@ function changeDirection(e, direction) {
     }
 }
 
-function goThroughBoardEdges() {
-    if(squaresPositions[0].x > gameLogic.values.BOARD_SQUARES_NUMBER - 1) {
-        squaresPositions[0].x = 0;
-    }
-
-    if(squaresPositions[0].x < 0) {
-        squaresPositions[0].x = gameLogic.values.BOARD_SQUARES_NUMBER - 1;
-    }
-    
-    if(squaresPositions[0].y > gameLogic.values.BOARD_SQUARES_NUMBER - 1) {
-        squaresPositions[0].y = 0;
-    }
-
-    if(squaresPositions[0].y < 0) {
-        squaresPositions[0].y = gameLogic.values.BOARD_SQUARES_NUMBER - 1;
-    }
-};
-
 function lengthen(squaresNumber) {
     const lastSquare = squaresPositions[squaresPositions.length - 1];
 
@@ -104,6 +86,24 @@ function changeSpeed(speedChange) {
         values.speed /= speedChange;
     }, values.powerupSpeedChangeTime * 1000);
 }
+
+function goThroughBoardEdges() {
+    if(squaresPositions[0].x > gameLogic.values.BOARD_SQUARES_NUMBER - 1) {
+        squaresPositions[0].x = 0;
+    }
+
+    if(squaresPositions[0].x < 0) {
+        squaresPositions[0].x = gameLogic.values.BOARD_SQUARES_NUMBER - 1;
+    }
+    
+    if(squaresPositions[0].y > gameLogic.values.BOARD_SQUARES_NUMBER - 1) {
+        squaresPositions[0].y = 0;
+    }
+
+    if(squaresPositions[0].y < 0) {
+        squaresPositions[0].y = gameLogic.values.BOARD_SQUARES_NUMBER - 1;
+    }
+};
 
 function goThroughWalls() {
     values.canGoThroughWalls = true;

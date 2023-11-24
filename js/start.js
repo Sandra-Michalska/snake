@@ -7,14 +7,20 @@ const values = {
 };
 
 function init() {
-	values.canvas = document.querySelector('#canvas');
-	values.ctx = canvas.getContext('2d');
-	
 	document.querySelector('#settings__start-button').addEventListener('click', function() {
+		values.canvas = document.querySelector('#canvas');
+		values.ctx = canvas.getContext('2d');
+	
 		const settings = prepareSettings();
-		toggleSections();
+		displayGame();
 		gameLogic.setSettings(settings);
 		gameLogic.startGame();
+	});
+
+	document.querySelector('#header__back-arrow').addEventListener('click', function() {
+		clearTimeout(gameLogic.values.loopGameTimeout);
+		closeGame();
+		displaySettings();
 	});
 };
 
@@ -36,20 +42,23 @@ function prepareSettings() {
 	};
 }
 
-function toggleSections() {
+function displayGame() {
 	document.querySelector('#game').classList.remove("game--hidden");
 	document.querySelector('#settings').classList.add("settings--hidden");
 	document.querySelector('#header__back-arrow').classList.remove("header__back-arrow--hidden");
+}
 
-	document.querySelector('#header__back-arrow').addEventListener('click', function() {
-		clearTimeout(gameLogic.values.loopGameTimeout);
-		gameLogic.resetGameValues();
-		gameLogic.values.bestScores = [];
-		document.querySelector('#game__score-list').innerHTML = '';
-		document.querySelector('#game').classList.add("game--hidden");
-		document.querySelector('#settings').classList.remove("settings--hidden");
-		document.querySelector('#header__back-arrow').classList.add("header__back-arrow--hidden");
-	});
+function displaySettings() {
+	document.querySelector('#game').classList.add("game--hidden");
+	document.querySelector('#settings').classList.remove("settings--hidden");
+	document.querySelector('#header__back-arrow').classList.add("header__back-arrow--hidden");
+}
+
+function closeGame() {
+	gameLogic.resetGameValues();
+	gameLogic.clearPowerupTimeout();
+	gameLogic.clearBestScores();
+	gameLogic.clearRenderedScoreList();
 }
 
 export const start = {

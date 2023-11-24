@@ -29,8 +29,7 @@ function setSettings(settings) {
     snakeLengthChange = gameSettings.snakeLengthChange;
 }
 
-function startGame() {        
-    resetGameValues();
+function startGame() {
     renderer.drawBackground();
     renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions);
     snake.setPosition();
@@ -46,7 +45,7 @@ function startGame() {
             40: 'down'
         };
 
-        const keyPressed = e.which; //
+        const keyPressed = e.which;
         const direction = keysToDirections[keyPressed];
         snake.changeDirection(e, direction);
     });
@@ -67,17 +66,11 @@ function loopGame() {
     snake.goThroughBoardEdges();
     renderer.drawSnake();
     checkIfActivatePowerup();
-    loseWhenGoingThroughSnake();
-    loseWhenGoingThroughObstacles();
+    loseIfSnakeHitsSnake();
+    loseIfSnakeHitsObstacle();
     eatApple();
 
     values.loopGameTimeout = setTimeout(loopGame, snake.values.speed * LOOP_EVERY_N_MS);
-}
-
-function increaseScore(pointsNumber) {
-    score += pointsNumber;
-
-    document.querySelector('#game__score').innerHTML = score;
 }
 
 // apple
@@ -141,8 +134,7 @@ function checkIfDrawPowerup() {
 function checkIfActivatePowerup() {
     if(Object.keys(powerupData).length === 0) return;
     
-    if(snake.getHead().x === powerupData.x && 
-        snake.getHead().y === powerupData.y) {
+    if(snake.getHead().x === powerupData.x && snake.getHead().y === powerupData.y) {
         powerupData = {};
         activatePowerup();
     }
@@ -237,24 +229,25 @@ function generatePowerupType() {
     }
 }
 
-function resetGameValues() {
-    score = 0;
-    applesEaten = 0;
-    powerupTimeoutSet = false;
+// score
+function increaseScore(pointsNumber) {
+    score += pointsNumber;
 
-    snake.resetVales();
-    
-    document.querySelector('#game__score').innerHTML = 0;
+    renderScore(score);
 }
 
-function addScoreToBestScores(score) {
+function renderScore(score) {
+    document.querySelector('#game__score').innerHTML = score;
+}
+
+function addToBestScores(score) {
     values.bestScores.push(score);
 
     values.bestScores = values.bestScores.sort(function (b, a) {
         return a - b;
     });
 
-    document.querySelector('#game__score-list').innerHTML = '';
+    clearRenderedScoreList();
 
     for(let i = 0; i < 5; i++) {
         if(values.bestScores[i]) {	
@@ -265,37 +258,60 @@ function addScoreToBestScores(score) {
     }
 }
 
-function loseWhenGoingThroughSnake() {
+function clearBestScores() {
+    values.bestScores = [];
+}
+
+function clearRenderedScoreList() {
+    document.querySelector('#game__score-list').innerHTML = '';
+}
+
+// lose
+function loseIfSnakeHitsSnake() {
     const snakeHead = snake.getHead();
 
     for (let i = 1; i < snake.getLength(); ++i) {
         if(snakeHead.x === snake.getSquarePosition(i).x && snakeHead.y === snake.getSquarePosition(i).y) {
-            finishGame();
+            loseGame();
         }
     }
 }
 
-function loseWhenGoingThroughObstacles() {
+function loseIfSnakeHitsObstacle() {
     if(snake.values.canGoThroughWalls) return;
     
     const snakeHead = snake.getHead();
 
     for (let i = 0; i < gameSettings.levelSettings.obstaclePositions.length; ++i) {
         if(snakeHead.x === gameSettings.levelSettings.obstaclePositions[i].x && snakeHead.y === gameSettings.levelSettings.obstaclePositions[i].y) {
-            finishGame();
+            loseGame();
         }
     }
 }
 
-function finishGame() {
-    addScoreToBestScores(score);
+function loseGame() {
+    addToBestScores(score);
     clearPowerupTimeout();
+    resetGameValues();
     startGame();
+}
+
+function resetGameValues() {
+    score = 0;
+    applesEaten = 0;
+    powerupTimeoutSet = false;
+
+    snake.resetVales();
+
+    renderScore(0);
 }
 
 export const gameLogic = {
     values,
     setSettings,
     startGame,
+    clearPowerupTimeout,
+    clearRenderedScoreList,
+    clearBestScores,
     resetGameValues
 };
