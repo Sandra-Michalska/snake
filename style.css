@@ -16,8 +16,9 @@ body {
     background-size: cover;
 }
 
+
 .header {
-    width: calc(100% - 135px);
+    width: calc(100% - 100px);
     display: flex;
     margin: 2em 0 4em;
 }
@@ -30,12 +31,12 @@ body {
     font-weight: bold;
 }
 
-.header__back-arrow--hidden {
-    visibility: hidden;
-}
-
 .header__back-arrow:hover {
     color: #e2dada;
+}
+
+.header__back-arrow--hidden {
+    visibility: hidden;
 }
 
 .header__heading-wrapper {
@@ -51,18 +52,19 @@ body {
     margin: 0;
 }
 
-.settings-wrapper {
+
+.settings {
     width: calc(100% - 135px);
-    max-width: 650px;
+    max-width: 710px;
     min-height: 430px;
     margin-bottom: 3em;
 }
 
-.settings-wrapper--hidden {
+.settings--hidden {
     display: none;
 }
 
-.settings {
+.settings__fieldset {
     padding: 3em 3em 2.6em;
     background: rgba(235, 170, 27, 0.9);
     border: 1px solid #615959;
@@ -85,7 +87,7 @@ body {
     margin-bottom: 1.5em;
 }
 
-.settings__option-label {
+.settings__label {
     padding: 0 0.8em 0 0;
     font-weight: 700;
     font-size: 1.5em;
@@ -103,13 +105,13 @@ body {
     cursor: pointer;
 }
 
-.settings__start-btn-wrapper {
+.settings__button-wrapper {
     display: flex;
     justify-content: center;
     margin-top: 2.2em;
 }
 
-.settings__start-btn {
+.settings__start-button {
     padding: 0.2em 0.7em;
     font-family: 'Caveat Brush';
     letter-spacing: 2px;
@@ -123,23 +125,21 @@ body {
     cursor: pointer;
 }
 
-.settings__start-btn:hover {
+.settings__start-button:hover {
     background: #e2dada;
 }
 
-.game-wrapper {
-    width: calc(100% - 135px);
-}
-
-.game-wrapper--hidden {
-    display: none;
-}
 
 .game {
-	display: flex;
+    width: calc(100% - 135px);
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
     font-size: 1.6em;
+}
+
+.game--hidden {
+    display: none;
 }
 
 .game__canvas {
@@ -158,7 +158,7 @@ body {
     font-weight: 700;
 }
 
-.game__score-txt {
+.game__score-text {
     margin: 0 0 1em;
 }
 
@@ -166,6 +166,6 @@ body {
     margin: 0 0 0 50px;
 }
 
-.game__best-score-txt {
+.game__best-scores-text {
     margin: 0 0 1em;
 }
