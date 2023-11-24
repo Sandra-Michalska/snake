@@ -1,5 +1,5 @@
-import './style.css'
-import { init } from './js/start.js'
+import './style.css';
+import { start } from './js/start.js';
 
 document.querySelector('#app').innerHTML = `
   <div class="wrapper">
@@ -66,6 +66,6 @@ document.querySelector('#app').innerHTML = `
         </section>
     </section>
   </div>
-`
+`;
 
-init()
+start.init();

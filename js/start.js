@@ -1,18 +1,18 @@
 import { SETTINGS } from './consts/settings.js';
-import { GameLogic } from './gameLogic.js';
-import { Renderer } from './renderer.js';
+import { gameLogic } from './gameLogic.js';
 
-export let renderer = null;
-export let gameLogic = null;
+const values = {
+	canvas: null,
+	ctx: null
+};
 
-export function init() {
-	renderer = new Renderer();
+function init() {
+	values.canvas = document.querySelector('#canvas');
+	values.ctx = canvas.getContext('2d');
 	
 	document.querySelector('#settings__start-button').addEventListener('click', function() {
 		const settings = prepareSettings();
 		toggleSections();
-
-		gameLogic = new GameLogic();
 		gameLogic.setSettings(settings);
 		gameLogic.startGame();
 	});
@@ -31,7 +31,7 @@ function prepareSettings() {
 	return {
 		levelSettings,
 		snakeSpeed: levelSettings.speed / chosenSettings.speed,
-		snakepowerupSpeedChangeTime: chosenSettings.powerupSpeedChangeTime,
+		snakePowerupSpeedChangeTime: chosenSettings.powerupSpeedChangeTime,
 		snakeLengthChange: chosenSettings.lengthChange
 	};
 }
@@ -42,11 +42,17 @@ function toggleSections() {
 	document.querySelector('#header__back-arrow').classList.remove("header__back-arrow--hidden");
 
 	document.querySelector('#header__back-arrow').addEventListener('click', function() {
-		clearTimeout(gameLogic.loopGameTimeout);
+		clearTimeout(gameLogic.values.loopGameTimeout);
 		gameLogic.resetGameValues();
+		gameLogic.values.bestScores = [];
 		document.querySelector('#game__score-list').innerHTML = '';
 		document.querySelector('#game').classList.add("game--hidden");
 		document.querySelector('#settings').classList.remove("settings--hidden");
 		document.querySelector('#header__back-arrow').classList.add("header__back-arrow--hidden");
 	});
 }
+
+export const start = {
+	values,
+	init
+};

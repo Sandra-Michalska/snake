@@ -1,121 +1,135 @@
-import { gameLogic } from './start.js';
+import { gameLogic } from './gameLogic.js';
 
-export function Snake() {
-    let squaresPositions = [];
-    let currentDirection = 'right';
-    this.canChangeDirection = true;
-    this.canGoThroughWalls = false;
+let squaresPositions = [];
+let currentDirection = 'right';
 
-    this.speed = 0;
-    this.powerupSpeedChangeTime = 0;
+const values = {
+    canChangeDirection: true,
+    canGoThroughWalls: false,
+    speed: 0,
+    powerupSpeedChangeTime: 0
+};
 
-    const that = this;
+function setPosition() {
+    squaresPositions.push({x: 2, y: 0}, {x: 1, y: 0}, {x: 0, y: 0});
+}
 
-    this.setPosition = function() {
-        squaresPositions.push({x: 2, y: 0}, {x: 1, y: 0}, {x: 0, y: 0});
+function getSquarePosition(i) {
+    return squaresPositions[i];
+}
+
+function getHead() {
+    return squaresPositions[0];
+}
+
+function getLength() {
+    return squaresPositions.length;
+}
+
+function move() {
+    for(let i = squaresPositions.length - 1; i > 0; i--) {
+        squaresPositions[i].x = squaresPositions[i-1].x;
+        squaresPositions[i].y = squaresPositions[i-1].y;
     }
 
-    this.getSquarePosition = function(i) {
-        return squaresPositions[i];
+    if(currentDirection === 'right') {
+        squaresPositions[0].x++;
     }
 
-    this.getHead = function() {
-        return squaresPositions[0];
+    if(currentDirection === 'left') {
+        squaresPositions[0].x--;
     }
 
-    this.getLength = function() {
-        return squaresPositions.length;
+    if(currentDirection === 'down') {
+        squaresPositions[0].y++;
     }
 
-    this.move = function() {
-        for(let i = squaresPositions.length - 1; i > 0; i--) {
-            squaresPositions[i].x = squaresPositions[i-1].x;
-            squaresPositions[i].y = squaresPositions[i-1].y;
-        }
-    
-        if(currentDirection === 'right') {
-            squaresPositions[0].x++;
-        }
-    
-        if(currentDirection === 'left') {
-            squaresPositions[0].x--;
-        }
-    
-        if(currentDirection === 'down') {
-            squaresPositions[0].y++;
-        }
-    
-        if(currentDirection === 'up') {
-            squaresPositions[0].y--;
-        }
-    }
-
-    this.changeDirection = function(e, direction) {
-        if(!this.canChangeDirection) return;
-
-        if(direction) {
-            e.preventDefault();
-
-            if(currentDirection === 'right' && direction === 'left') return;
-            if(currentDirection === 'left' && direction === 'right') return;
-            if(currentDirection === 'up' && direction === 'down') return;
-            if(currentDirection === 'down' && direction === 'up') return;
-        
-            currentDirection = direction;
-            this.canChangeDirection = false;
-        }
-    }
-
-    this.goThroughBoardEdges = function() {
-        if(squaresPositions[0].x > gameLogic.BOARD_SQUARES_NUMBER - 1) {
-            squaresPositions[0].x = 0;
-        }
-
-        if(squaresPositions[0].x < 0) {
-            squaresPositions[0].x = gameLogic.BOARD_SQUARES_NUMBER - 1;
-        }
-        
-        if(squaresPositions[0].y > gameLogic.BOARD_SQUARES_NUMBER - 1) {
-            squaresPositions[0].y = 0;
-        }
-
-        if(squaresPositions[0].y < 0) {
-            squaresPositions[0].y = gameLogic.BOARD_SQUARES_NUMBER - 1;
-        }
-    };
-
-    this.lengthen = function(squaresNumber) {
-        const lastSquare = squaresPositions[squaresPositions.length - 1];
-    
-        for(let i = 0; i < squaresNumber; i++) {
-            squaresPositions.push({x: lastSquare.x, y: lastSquare.y});
-        }
-    }
-
-    this.shorten = function(squaresNumber) {
-        for(let i = 0; i < squaresNumber; i++) {
-            squaresPositions.pop();
-        }
-    }
-
-    this.changeSpeed = function(speedChange) {
-        this.speed *= speedChange;
-
-        setTimeout(function() {
-            that.speed /= speedChange;
-        }, that.powerupSpeedChangeTime * 1000);
-    }
-
-    this.goThroughWalls = function() {
-        this.canGoThroughWalls = true;
-        
-        setTimeout(function() {
-            that.canGoThroughWalls = false;
-        }, 7000);
-    }
-
-    this.resetVales = function() {
-        squaresPositions = [];
-        currentDirection = 'right';
+    if(currentDirection === 'up') {
+        squaresPositions[0].y--;
     }
 }
+
+function changeDirection(e, direction) {
+    if(!values.canChangeDirection) return;
+
+    if(direction) {
+        e.preventDefault();
+
+        if(currentDirection === 'right' && direction === 'left') return;
+        if(currentDirection === 'left' && direction === 'right') return;
+        if(currentDirection === 'up' && direction === 'down') return;
+        if(currentDirection === 'down' && direction === 'up') return;
+    
+        currentDirection = direction;
+        values.canChangeDirection = false;
+    }
+}
+
+function goThroughBoardEdges() {
+    if(squaresPositions[0].x > gameLogic.values.BOARD_SQUARES_NUMBER - 1) {
+        squaresPositions[0].x = 0;
+    }
+
+    if(squaresPositions[0].x < 0) {
+        squaresPositions[0].x = gameLogic.values.BOARD_SQUARES_NUMBER - 1;
+    }
+    
+    if(squaresPositions[0].y > gameLogic.values.BOARD_SQUARES_NUMBER - 1) {
+        squaresPositions[0].y = 0;
+    }
+
+    if(squaresPositions[0].y < 0) {
+        squaresPositions[0].y = gameLogic.values.BOARD_SQUARES_NUMBER - 1;
+    }
+};
+
+function lengthen(squaresNumber) {
+    const lastSquare = squaresPositions[squaresPositions.length - 1];
+
+    for(let i = 0; i < squaresNumber; i++) {
+        squaresPositions.push({x: lastSquare.x, y: lastSquare.y});
+    }
+}
+
+function shorten(squaresNumber) {
+    for(let i = 0; i < squaresNumber; i++) {
+        squaresPositions.pop();
+    }
+}
+
+function changeSpeed(speedChange) {
+    values.speed *= speedChange;
+
+    setTimeout(function() {
+        values.speed /= speedChange;
+    }, values.powerupSpeedChangeTime * 1000);
+}
+
+function goThroughWalls() {
+    values.canGoThroughWalls = true;
+    
+    setTimeout(function() {
+        values.canGoThroughWalls = false;
+    }, 7000);
+}
+
+function resetVales() {
+    squaresPositions = [];
+    currentDirection = 'right';
+}
+
+export const snake = {
+    values,
+    setPosition,
+    getSquarePosition,
+    getHead,
+    getLength,
+    move,
+    changeDirection,
+    goThroughBoardEdges,
+    lengthen,
+    shorten,
+    changeSpeed,
+    goThroughWalls,
+    resetVales
+};
