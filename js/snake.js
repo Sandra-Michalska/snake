@@ -1,4 +1,4 @@
-import { BOARD_SQUARES_NUMBER } from './consts/consts.js'
+import { gameLogic } from './start.js';
 
 export function Snake() {
     let squaresPositions = [];
@@ -67,20 +67,20 @@ export function Snake() {
     }
 
     this.goThroughBoardEdges = function() {
-        if(squaresPositions[0].x > BOARD_SQUARES_NUMBER - 1) {
+        if(squaresPositions[0].x > gameLogic.BOARD_SQUARES_NUMBER - 1) {
             squaresPositions[0].x = 0;
         }
 
         if(squaresPositions[0].x < 0) {
-            squaresPositions[0].x = BOARD_SQUARES_NUMBER - 1;
+            squaresPositions[0].x = gameLogic.BOARD_SQUARES_NUMBER - 1;
         }
         
-        if(squaresPositions[0].y > BOARD_SQUARES_NUMBER - 1) {
+        if(squaresPositions[0].y > gameLogic.BOARD_SQUARES_NUMBER - 1) {
             squaresPositions[0].y = 0;
         }
 
         if(squaresPositions[0].y < 0) {
-            squaresPositions[0].y = BOARD_SQUARES_NUMBER - 1;
+            squaresPositions[0].y = gameLogic.BOARD_SQUARES_NUMBER - 1;
         }
     };
 

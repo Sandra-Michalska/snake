@@ -3,7 +3,7 @@ import { GameLogic } from './gameLogic.js';
 import { Renderer } from './renderer.js';
 
 export let renderer = null;
-let gameLogic = null;
+export let gameLogic = null;
 
 export function init() {
 	renderer = new Renderer();

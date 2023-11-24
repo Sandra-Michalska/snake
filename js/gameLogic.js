@@ -1,8 +1,8 @@
 import { Snake } from './snake.js';
 import { renderer } from './start.js';
-import { BOARD_SQUARES_NUMBER } from './consts/consts.js'
 
 export function GameLogic() {
+    this.BOARD_SQUARES_NUMBER = 20;
     const LOOP_EVERY_N_MS = 1000;
     let score = 0;
     let applesEaten = 0;
@@ -90,8 +90,8 @@ export function GameLogic() {
     
         while(!isPositionAllowed) {
             applePosition = {
-                x: Math.floor(Math.random() * BOARD_SQUARES_NUMBER),
-                y: Math.floor(Math.random() * BOARD_SQUARES_NUMBER)
+                x: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER),
+                y: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER)
             };
     
             isPositionAllowed = true;
@@ -160,8 +160,8 @@ export function GameLogic() {
     
         while(!isPositionAllowed) {
             powerupData = {
-                x: Math.floor(Math.random() * BOARD_SQUARES_NUMBER),
-                y: Math.floor(Math.random() * BOARD_SQUARES_NUMBER)
+                x: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER),
+                y: Math.floor(Math.random() * that.BOARD_SQUARES_NUMBER)
             };
 
             isPositionAllowed = true;
