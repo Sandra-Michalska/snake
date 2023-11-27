@@ -1,5 +1,14 @@
 import { start } from './start.js';
 import { snake } from './snake.js';
+import apple from '/images/apple.png';
+import obstacle from '/images/obstacle.png';
+import obstacleTransparent from '/images/obstacle-transparent.png';
+import lengthen from '/images/powerups/lengthen.png';
+import shorten from '/images/powerups/shorten.png';
+import speedUp from '/images/powerups/speed-up.png';
+import speedDown from '/images/powerups/speed-down.png';
+import points from '/images/powerups/points.png';
+import goThroughWalls from '/images/powerups/go-through-walls.png';
 
 const SQUARE_SIZE = 29;
 const LINE_WIDTH = 1;
@@ -19,15 +28,15 @@ const imgData = {
     }
 };
 
-imgData.apple.src = '/images/apple.png';
-imgData.obstacle.src = '/images/obstacle.png';
-imgData.obstacleTransparent.src = '/images/obstacle-transparent.png';
-imgData.powerups.lengthen.src = '/images/powerups/lengthen.png';
-imgData.powerups.shorten.src = '/images/powerups/shorten.png';
-imgData.powerups.speedUp.src = '/images/powerups/speed-up.png';
-imgData.powerups.speedDown.src = '/images/powerups/speed-down.png';
-imgData.powerups.points.src = '/images/powerups/points.png';
-imgData.powerups.goThroughWalls.src = '/images/powerups/go-through-walls.png';
+imgData.apple.src = apple;
+imgData.obstacle.src = obstacle;
+imgData.obstacleTransparent.src = obstacleTransparent;
+imgData.powerups.lengthen.src = lengthen;
+imgData.powerups.shorten.src = shorten;
+imgData.powerups.speedUp.src = speedUp;
+imgData.powerups.speedDown.src = speedDown;
+imgData.powerups.points.src = points;
+imgData.powerups.goThroughWalls.src = goThroughWalls;
 
 function drawImg(imgToDisplay, x, y, width, height) {
     const imgXPosition = x * (LINE_WIDTH + SQUARE_SIZE) + LINE_WIDTH;
