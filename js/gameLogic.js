@@ -7,7 +7,7 @@ let applesEaten = 0;
 let applePosition = null;
 let powerupData = {};
 let powerupsNumber = 6;
-let	activatePowerup = null;
+let activatePowerup = null;
 let snakeLengthChange = 1;
 
 let startGameTimeout;
@@ -55,7 +55,7 @@ function startGame() {
 
 function loopGame() {
     clearTimeout(startGameTimeout);
-    clearTimeout(values.loopGameTimeout);
+    clearLoopGameTimeout();
     snake.values.canChangeDirection = true;
     renderer.drawBackground(); // to clean previous snake state
     renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions);
@@ -71,6 +71,9 @@ function loopGame() {
     eatApple();
 
     values.loopGameTimeout = setTimeout(loopGame, snake.values.speed * LOOP_EVERY_N_MS);
+}
+function clearLoopGameTimeout() {
+    clearTimeout(values.loopGameTimeout);
 }
 
 // apple
@@ -310,6 +313,7 @@ export const gameLogic = {
     values,
     setSettings,
     startGame,
+    clearLoopGameTimeout,
     clearPowerupTimeout,
     clearRenderedScoreList,
     clearBestScores,

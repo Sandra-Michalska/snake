@@ -18,7 +18,6 @@ function init() {
 	});
 
 	document.querySelector('#header__back-arrow').addEventListener('click', function() {
-		clearTimeout(gameLogic.values.loopGameTimeout);
 		closeGame();
 		displaySettings();
 	});
@@ -56,6 +55,7 @@ function displaySettings() {
 
 function closeGame() {
 	gameLogic.resetGameValues();
+	gameLogic.clearLoopGameTimeout();
 	gameLogic.clearPowerupTimeout();
 	gameLogic.clearBestScores();
 	gameLogic.clearRenderedScoreList();
