@@ -10,7 +10,7 @@ const values = {
     powerupSpeedChangeTime: 0
 };
 
-function setPosition() {
+function setSquaresPositions() {
     squaresPositions.push({x: 2, y: 0}, {x: 1, y: 0}, {x: 0, y: 0});
 }
 
@@ -120,7 +120,7 @@ function resetVales() {
 
 export const snake = {
     values,
-    setPosition,
+    setSquaresPositions,
     getSquarePosition,
     getHead,
     getLength,

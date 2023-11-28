@@ -95,14 +95,10 @@ function drawSnake() {
 }
 
 function drawApple(applePosition) {
-    if(applePosition === null) return;
-
     drawImg(imgData.apple, applePosition.x, applePosition.y, SQUARE_SIZE, SQUARE_SIZE);
 }
 
 function drawPowerup(powerupData) {
-    if(Object.keys(powerupData).length === 0) return;
-
     drawImg(imgData.powerups[powerupData.type], powerupData.x, powerupData.y, SQUARE_SIZE, SQUARE_SIZE);
 }
 

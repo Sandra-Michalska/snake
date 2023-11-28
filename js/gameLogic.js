@@ -2,6 +2,7 @@ import { snake } from './snake.js';
 import { renderer } from './renderer.js';
 
 const LOOP_EVERY_N_MS = 1000;
+let gameSettings = null;
 let score = 0;
 let applesEaten = 0;
 let applePosition = null;
@@ -9,17 +10,15 @@ let powerupData = {};
 let powerupsNumber = 6;
 let activatePowerup = null;
 let snakeLengthChange = 1;
+let bestScores = [];
 
 let startGameTimeout;
+let loopGameTimeout;
 let powerupTimeout;
 let powerupTimeoutSet = false;
 
-let gameSettings = null;
-
 const values = {
-    BOARD_SQUARES_NUMBER: 20,
-    bestScores: [],
-    loopGameTimeout: null
+    BOARD_SQUARES_NUMBER: 20
 };
 
 function setSettings(settings) {
@@ -32,10 +31,10 @@ function setSettings(settings) {
 function startGame() {
     renderer.drawBackground();
     renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions);
-    snake.setPosition();
-    renderer.drawSnake();
+    snake.setSquaresPositions();
     generateApplePosition();
     renderer.drawApple(applePosition);
+    renderer.drawSnake();
 
     document.addEventListener('keydown', function(e) {
         const keysToDirections = {
@@ -59,9 +58,9 @@ function loopGame() {
     snake.values.canChangeDirection = true;
     renderer.drawBackground(); // to clean previous snake state
     renderer.drawObstacles(gameSettings.levelSettings.obstaclePositions);
-    checkIfDrawPowerup();
-    renderer.drawPowerup(powerupData);
     renderer.drawApple(applePosition);
+    checkIfSetPowerupTimeout();
+    checkIfDrawPowerup();
     snake.move();
     snake.goThroughBoardEdges();
     renderer.drawSnake();
@@ -70,10 +69,10 @@ function loopGame() {
     loseIfSnakeHitsObstacle();
     eatApple();
 
-    values.loopGameTimeout = setTimeout(loopGame, snake.values.speed * LOOP_EVERY_N_MS);
+    loopGameTimeout = setTimeout(loopGame, snake.values.speed * LOOP_EVERY_N_MS);
 }
 function clearLoopGameTimeout() {
-    clearTimeout(values.loopGameTimeout);
+    clearTimeout(loopGameTimeout);
 }
 
 // apple
@@ -115,24 +114,32 @@ function eatApple() {
         increaseScore(gameSettings.levelSettings.level);
         applesEaten += 1;
 
-        if((applesEaten + gameSettings.levelSettings.level) % 3 === 0) {
+        const shouldPreparePowerupData = (applesEaten + gameSettings.levelSettings.level) % 3 === 0;
+        if(shouldPreparePowerupData) {
             preparePowerupData();
         }
     }
 }
 
 // powerups
-function checkIfDrawPowerup() {
-    if(Object.keys(powerupData).length !== 0) {
-        if(!powerupTimeoutSet) {
-            powerupTimeoutSet = true;
-            powerupTimeout = setTimeout(function() {
-                powerupData = {}; // hide powerup
-                powerupTimeoutSet = false;
-            }, 10000);
-        }
+function checkIfSetPowerupTimeout() {
+    if(Object.keys(powerupData).length === 0) return;
+
+    if(!powerupTimeoutSet) {
+        powerupTimeoutSet = true;
+        powerupTimeout = setTimeout(function() {
+            powerupData = {}; // hide powerup
+            powerupTimeoutSet = false;
+        }, 10000);
     }
 }
+
+function checkIfDrawPowerup() {
+    if(Object.keys(powerupData).length === 0) return;
+        
+    renderer.drawPowerup(powerupData);
+}
+
 
 function checkIfActivatePowerup() {
     if(Object.keys(powerupData).length === 0) return;
@@ -244,25 +251,25 @@ function renderScore(score) {
 }
 
 function addToBestScores(score) {
-    values.bestScores.push(score);
+    bestScores.push(score);
 
-    values.bestScores = values.bestScores.sort(function (b, a) {
+    bestScores = bestScores.sort(function (b, a) {
         return a - b;
     });
 
     clearRenderedScoreList();
 
     for(let i = 0; i < 5; i++) {
-        if(values.bestScores[i]) {	
+        if(bestScores[i]) {	
             const li = document.createElement('li');
-            li.appendChild(document.createTextNode(values.bestScores[i]));
+            li.appendChild(document.createTextNode(bestScores[i]));
             document.querySelector('#game__score-list').appendChild(li).classList.add('game__score-list-item');
         }
     }
 }
 
 function clearBestScores() {
-    values.bestScores = [];
+    bestScores = [];
 }
 
 function clearRenderedScoreList() {
