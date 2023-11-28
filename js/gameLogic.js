@@ -309,6 +309,14 @@ function resetGameValues() {
     renderScore(0);
 }
 
+function closeGame() {
+	resetGameValues();
+	clearLoopGameTimeout();
+	clearPowerupTimeout();
+	clearBestScores();
+	clearRenderedScoreList();
+}
+
 export const gameLogic = {
     values,
     setSettings,
@@ -317,5 +325,6 @@ export const gameLogic = {
     clearPowerupTimeout,
     clearRenderedScoreList,
     clearBestScores,
-    resetGameValues
+    resetGameValues,
+    closeGame
 };

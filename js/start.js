@@ -18,7 +18,7 @@ function init() {
 	});
 
 	document.querySelector('#header__back-arrow').addEventListener('click', function() {
-		closeGame();
+		gameLogic.closeGame();
 		displaySettings();
 	});
 };
@@ -51,14 +51,6 @@ function displaySettings() {
 	document.querySelector('#game').classList.add("game--hidden");
 	document.querySelector('#settings').classList.remove("settings--hidden");
 	document.querySelector('#header__back-arrow').classList.add("header__back-arrow--hidden");
-}
-
-function closeGame() {
-	gameLogic.resetGameValues();
-	gameLogic.clearLoopGameTimeout();
-	gameLogic.clearPowerupTimeout();
-	gameLogic.clearBestScores();
-	gameLogic.clearRenderedScoreList();
 }
 
 export const start = {
