@@ -105,7 +105,7 @@ function goThroughBoardEdges() {
     }
 };
 
-function goThroughWalls() {
+function activateGoingThroughWalls() {
     values.canGoThroughWalls = true;
     
     setTimeout(function() {
@@ -130,6 +130,6 @@ export const snake = {
     lengthen,
     shorten,
     changeSpeed,
-    goThroughWalls,
+    activateGoingThroughWalls,
     resetVales
 };

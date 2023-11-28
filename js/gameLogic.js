@@ -225,7 +225,7 @@ function generatePowerupType() {
         case 6:
             activatePowerup = function() {
                 clearPowerupTimeout();
-                snake.goThroughWalls();
+                snake.activateGoingThroughWalls();
             }
             powerupData.type = 'goThroughWalls';
             break;
